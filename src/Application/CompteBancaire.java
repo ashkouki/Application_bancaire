@@ -18,6 +18,24 @@ public class CompteBancaire {
         solde += montant;
     }
 
+    
+    public void retrait(double montant) throws SoldeInsuffisantException {
+        if (solde >= montant) {
+            solde -= montant;
+        } else {
+            throw new SoldeInsuffisantException("Solde insuffisant pour effectuer le retrait.");
+        }
+    }
+
+    public void transferer(CompteBancaire destination, double montant) throws SoldeInsuffisantException {
+        if (solde >= montant) {
+            retrait(montant);
+            destination.depot(montant);
+        } else {
+            throw new SoldeInsuffisantException("Solde insuffisant pour effectuer le transfert.");
+        }
+    }
+    
 	public static void main(String[] args) {
 	
 
